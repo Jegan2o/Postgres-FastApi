@@ -9,27 +9,6 @@ app = FastAPI()
 
 models.Base.metadata.create_all(bind=engine)
 
-# class ChoiceBase(BaseModel) :
-#     choice_text: str
-#     is_correct: bool
-
-# class QuestionBase(BaseModel):
-#     questions_text: str
-#     choices: List[ChoiceBase]
-
-
-
-# class UserBase(BaseModel):
-#     username: str
-#     password: str
-#     email: str
-#     phone: str
-
-
-# class ProfileBase(BaseModel):
-#     profile_image: str
-
-
 
 class ProfileBase(BaseModel):
     profile_image: Optional[str] = None
@@ -83,16 +62,7 @@ db_dependency = Annotated[Session,Depends(get_db)]
 
 
 
-# @app.post("/questions/")
-# async def create_questions(question: QuestionBase, db: db_dependency):
-#     db_question = models.Questions(questions_text=question.questions_text)
-#     db.commit()
-#     # db.refresh(db_question)
-#     for choice in question.choices:
-#         db_choice = models.Choices(choice_text=choice.choice_text,is_correct=choice.is_correct,question_id=db_question.id)
-#         db.add(db_choice)
-#     db.commit()
-#     return db_question
+
 
 
 @app.post("/users/", response_model=User)
